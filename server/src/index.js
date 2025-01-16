@@ -1,13 +1,16 @@
 import express from 'express';
 import 'dotenv/config';
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
 import router from './routes/index.routes.js';
-
+import { connectDB } from './config/db.js';
+/*
 mongoose.connect(process.env.DATABASE_URL);
 
 const db = mongoose.connection;
 db.on('error', (error) => console.log(error));
-db.once('open', () => console.log('Connected to Dis Commerce Database.'));
+db.once('open', () => console.log('Connected to Dis Commerce Database.'));*/
+
+connectDB();
 
 const PORT = process.env.PORT || process.env.LOCAL_PORT;
 const app = express();
