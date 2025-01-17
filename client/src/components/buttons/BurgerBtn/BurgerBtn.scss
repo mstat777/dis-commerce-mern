@@ -1,0 +1,33 @@
+@use '../../../global.scss' as *;
+
+$btn-height: 36px;
+
+.burger_btn {
+   position: absolute;
+   top: calc(($header-height - $btn-height) / 2);
+   left: calc(($header-height - $btn-height) / 2 + 6px);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 36px;
+   width: 36px;
+   border: none;
+   border-radius: 9px;
+   color: $secondary-color-4;
+   background-color: transparent;
+   z-index: 10;
+   transition: color .4s;
+
+   &:hover {
+      color: $main-color-4;
+   }
+
+   >svg {
+      font-size: 2.4rem;
+   }
+
+   >span {
+      font-size: 1.4rem;
+   }
+}

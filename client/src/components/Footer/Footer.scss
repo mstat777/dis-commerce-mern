@@ -1,0 +1,112 @@
+@use '../../global.scss' as *;
+
+.footer {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: auto;
+   padding: 1.5rem;
+   font-size: 1.4rem;
+   text-align: center;
+   background-color: $light-color;
+
+   &_links {
+      >div {
+         display: flex;
+         flex-direction: column;
+         margin: .8rem auto 1.5rem;
+
+         h2 {
+            margin: 1rem 0;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+         }
+
+         a {
+            margin-bottom: .8em;
+            font-size: 1.4rem;
+            color: $main-color-1;
+            text-transform: none;
+         }
+
+         &:nth-child(3) {
+            padding-left: 4rem;
+            padding-right: 4rem;
+
+            >p {
+               font-size: 1.2rem;
+            }
+         }
+
+         .footer_social {
+            display: flex;
+            margin: 0 auto 1.5rem;
+
+            svg {
+               margin: auto .8rem;
+               color: $main-color-1;
+               font-size: 2.5rem;
+            }
+         }
+
+         .newsletter_form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            input {
+               width: 80%;
+               padding: .5rem;
+               border: none;
+               font-size: 1.4rem;
+               font-weight: 500;
+            }
+
+            button {
+               margin: 0 0 0 .5rem;
+               padding: .6rem .8em .5rem;
+            }
+         }
+
+         .ok_msg,
+         .err_msg {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            color: $ok-color;
+         }
+
+         .err_msg {
+            color: $nok-color;
+         }
+
+         .payment_methods {
+            display: flex;
+            justify-content: center;
+
+            img {
+               width: 4rem;
+               margin: 0 .2rem;
+            }
+         }
+      }
+
+      @media screen and (min-width: $desktop) {
+         max-width: 1100px;
+         display: flex;
+
+         >div {
+            width: 33.33%;
+         }
+      }
+   }
+
+   &_legal {
+      p {
+         display: block;
+         margin-bottom: 0;
+         color: $dark-color;
+      }
+   }
+}

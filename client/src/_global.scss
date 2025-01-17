@@ -1,0 +1,49 @@
+// ---------------------- Colors ---------------------- //
+$light-color: white;
+$dark-color: #000914;
+
+$main-color-0: #3d1b01;
+$main-color-1: #5f2a00;
+$main-color-2: #7e3801;
+$main-color-3: #b55000;
+$main-color-4: #d35d00;
+$main-color-5: #da7724;
+$main-color-6: #e4945b;
+$main-color-7: #ebb68f;
+$main-color-8: #f1cdb2;
+$main-color-9: #faede6;
+
+$secondary-color-0: #012555;
+$secondary-color-1: #023c8a;
+$secondary-color-2: #1467d7;
+$secondary-color-3: #347edc;
+$secondary-color-4: #6097e2;
+$secondary-color-5: #8eb3ea;
+$secondary-color-6: #a4c3ee;
+$secondary-color-7: #bcd3f4;
+$secondary-color-8: #d3e1f6;
+$secondary-color-9: #e6edf7;
+
+$ok-color: #08d25c;
+$nok-color: #e71369;
+
+$darkgrey-color-4: #313131;
+$darkgrey-color-3: #444;
+$darkgrey-color-2: #626262; // input, textarea, select...
+$darkgrey-color-1: #808080;
+$lightgrey-color-1: #b3b3b3;
+$lightgrey-color-2: #c3c3c3; // table cells borders
+$lightgrey-color-3: #dfdfdf;
+$lightgrey-color-4: #f3f3f3; // alternate table rows
+
+// ----------------------- Fonts ---------------------- //
+$main-font: 'Red Hat Text', sans-serif;
+$title-font: 'Red Hat Text', sans-serif; // for headings
+
+// ------------ Breakpoints (media queries) ----------- //
+$tablet: 768px;
+$desktop: 1100px;
+
+// ----------------------- Other ---------------------- //
+$header-height: 50px;
+$footer-height: 30px;
