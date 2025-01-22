@@ -2,6 +2,7 @@
 client/node_modules
 client/.env
 client/dist
+client/public/img
 
 #server
 server/node_modules

@@ -58,7 +58,7 @@ export const getUser = async (req, res, next) => {
    let user;
    try {
       user = await user.findById(req.params.id);
-      if (!subscriber) {
+      if (!user) {
          return res.status(404).json({ message: "Cannot find the user." })
       }
    } catch (err) {

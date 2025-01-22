@@ -1,0 +1,26 @@
+[
+   {
+      "name": "Auchan",
+      "address": "Cc Baobab, 93330 Neuilly-sur-Marne"
+   },
+   {
+      "name": "Carrefour",
+      "address": "Clos Du, Bd du Mont d'Est, 93160 Noisy-le-Grand"
+   },
+   {
+      "name": "Darty",
+      "address": "Centre Commercial des Arcades, 234 Bd du Mont d'Est, 93160 Noisy-le-Grand"
+   },
+   {
+      "name": "Fnac",
+      "address": "Centre Commercial Westfield Rosny, 2 Av. du Général de Gaulle, 93117 Rosny-sous-Bois"
+   },
+   {
+      "name": "Intersport",
+      "address": "11 Av. des Roses, 94380 Bonneuil-sur-Marne"
+   },
+   {
+      "name": "Lidl",
+      "address": "113 Av. du Général de Gaulle, 93330 Neuilly-sur-Marne"
+   }
+]

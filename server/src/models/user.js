@@ -6,8 +6,22 @@ const userSchema = new Schema({
       required: true
    },
    address: {
-      type: String,
-      required: true
+      street: {
+         type: String,
+         required: true
+      },
+      city: {
+         type: String,
+         required: true
+      },
+      postalCode: {
+         type: String,
+         required: true
+      },
+      country: {
+         type: String,
+         required: true
+      },
    },
    registerDate: {
       type: Date,

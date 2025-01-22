@@ -1,0 +1,59 @@
+[
+   {
+      "title": "Skyr protéiné nature 0% MG YOPLAIT",
+      "subtitle": "Skyr protéiné nature 0% MG YOPLAIT",
+      "mainCategory": "Produits laitiers",
+      "subCategory": "Yaourts et Fromages blancs",
+      "description": "Pour bien le prononcer, dîtes skiiiir ! Ce yaourt est le chouchou des islandais : il y a 1000 ans, sa recette a été rapportée par des vikings, venus tout droit de Norvège. Yoplait revisite cette recette nordique, avec son lait 100% français et ses ingrédients d'origine naturelle pour encore plus de plaisir !",
+      "vendorId": "678f897a159f442c196102f2",
+      "status": "disponible",
+      "variations": {
+         "quantity": 210,
+         "sku": "0423-1245",
+         "weight": 400,
+         "productPrice": 2.19,
+         "discount": 40,
+         "productImagePath": "produits-laitieres/skyr-0-mg-yoplait",
+         "productMainImage": "001",
+         "productOtherImages": ["001", "002"]
+      }
+   },
+   {
+      "title": "Détachant Avant Lavage Super Power K2R",
+      "subtitle": "le pistolet de 550mL",
+      "mainCategory": "Entretien et Nettoyage",
+      "subCategory": "Adoucissants et Soin du linge",
+      "description": "Super Power : ultra-performance contre les taches pour un résultat impéccable. Decouvrez K2r Super Power, notre meilleur pistolet détachant Avant Lavage*. Issue de la recherche et de l'expertiste K2r sa formule unique contient 50% d'agents actifs en plus**. Pour cibler parfaitement les taches les plus tenaces. Pour éliminer en profondeur les taches les plus incrustées, même sèches, tout en respect…",
+      "vendorId": "678f897a159f442c196102f2",
+      "status": "disponible",
+      "variations": {
+         "quantity": 52,
+         "sku": "0423-1235",
+         "weight": 550,
+         "productPrice": 4.89,
+         "discount": 0,
+         "productImagePath": "entretien-et-nettoyage/detachant-avant-lavage-super-power-k2r",
+         "productMainImage": "001",
+         "productOtherImages": ["001"]
+      }
+   },
+   {
+      "title": "Soda au cola sans sucres PEPSI",
+      "subtitle": "le pistolet de 550mL",
+      "mainCategory": "Boissons",
+      "subCategory": "Adoucissants et Soin du linge",
+      "description": "Super Power : ultra-performance contre les taches pour un résultat impéccable. Decouvrez K2r Super Power, notre meilleur pistolet détachant Avant Lavage*. Issue de la recherche et de l'expertiste K2r sa formule unique contient 50% d'agents actifs en plus**. Pour cibler parfaitement les taches les plus tenaces. Pour éliminer en profondeur les taches les plus incrustées, même sèches, tout en respect…",
+      "vendorId": "678f897a159f442c196102f2",
+      "status": "disponible",
+      "variations": {
+         "quantity": 3000,
+         "sku": "0423-1239",
+         "weight": 1500,
+         "productPrice": 1.25,
+         "discount": 10,
+         "productImagePath": "boissons/soda-au-cola-sans-sucres-pepsi",
+         "productMainImage": "001",
+         "productOtherImages": ["001", "002", "003"]
+      }
+   }
+]
