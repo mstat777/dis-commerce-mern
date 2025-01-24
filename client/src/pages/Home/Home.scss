@@ -1,3 +1,14 @@
 @use '../../global.scss' as *;
 
-.home {}
+.home {
+
+   .promo_products {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: $lightgrey-color-4;
+   }
+}

@@ -1,0 +1,12 @@
+@use '../../global' as *;
+
+.rating {
+   display: flex;
+   align-items: center;
+
+   >svg {
+      font-size: 1.4rem;
+      margin: .1rem;
+      color: $star-color;
+   }
+}

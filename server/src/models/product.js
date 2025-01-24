@@ -95,7 +95,11 @@ const productSchema = new Schema({
       productOtherImages: [{
          type: String,
          required: true
-      }]
+      }],
+      rating: {
+         type: Number,
+         default: 0
+      }
    }],
    registerDate: {
       type: Date,

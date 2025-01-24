@@ -3,6 +3,10 @@ import { Schema, model } from 'mongoose';
 const userSchema = new Schema({
    name: {
       type: String,
+      required: [true, "can't be blank"]
+   },
+   password: {
+      type: String,
       required: true
    },
    address: {
@@ -23,6 +27,10 @@ const userSchema = new Schema({
          required: true
       },
    },
+   roles: [{
+      type: String,
+      required: true
+   }],
    registerDate: {
       type: Date,
       required: true,
