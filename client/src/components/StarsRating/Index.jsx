@@ -15,13 +15,11 @@ export default function StarsRating({rating}){
    } else {
       halfStars = 0;
       if (decimal >= 0.75){
-         console.log(fullStars);
          fullStars++;
-         console.log(fullStars);
       }
    }
    const emptyStars = maxRating - fullStars - halfStars;
-   console.log(fullStars,decimal,emptyStars);
+   //console.log(fullStars,decimal,emptyStars);
 
    return (
       rating ?

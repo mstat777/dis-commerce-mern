@@ -3,6 +3,7 @@ import {
    getOneUser,
    getAllUsers,
    createUser,
+   logUser,
    updateUser,
    deleteUser,
    getUser
@@ -16,9 +17,10 @@ router.get("/:id", getUser, getOneUser);
 
 // create an user
 router.post("/", createUser);
+router.post("/signin", logUser)
 
 // update an user
-router.patch("/", getUser, updateUser);
+router.patch("/:id", getUser, updateUser);
 
 // delete an user
 router.delete("/:id", getUser, deleteUser);

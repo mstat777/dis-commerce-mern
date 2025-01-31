@@ -1,4 +1,20 @@
 import User from "../models/user.js";
+import { hash, compare } from "bcrypt";
+
+const SALT = 10;
+
+export const checkToken = async (req, res) => {
+   try {
+      res.json({
+         msg: "authentified",
+         email: req.user.email,
+         id: req.user.id,
+         roles: req.user.roles
+      });
+   } catch (err) {
+      res.status(500).json({ message: err.message });
+   }
+}
 
 export const getOneUser = (req, res) => {
    res.send(res.user);
@@ -14,17 +30,60 @@ export const getAllUsers = async (req, res) => {
 }
 
 export const createUser = async (req, res) => {
-   const user = new User({
-      name: req.body.name,
-      address: req.body.address,
-      registerDate: req.body.registerDate,
-   });
-
    try {
-      const newUser = await user.save();
-      res.status(201).json(newUser);
+      console.log(req.body);
+      const user = await User.findOne({ email: req.body.email });
+      console.log(user);
+      if (user) {
+         console.log("res.user.name = ", res.user.name);
+         msg = "User account already exists. Please log in.";
+         res.status(409).json({ msg });
+      } else {
+         const user = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            tel: req.body.tel,
+            birthDate: req.body.birthDate,
+            password: await hash(req.body.birthDate, SALT),
+            address: req.body.address,
+            roles: req.body.roles,
+            newsLetter: req.body.newsLetter
+         });
+         const newUser = await user.save();
+         res.status(201).json({ message: 'Registration successful' });
+      }
    } catch (err) {
       res.status(400).json({ message: err.message });
+   }
+}
+
+export const logUser = async (req, res) => {
+   try {
+      let msg;
+      const user = await User.findOne({ email: req.body.email });
+      // if user is found in the DB
+      if (user) {
+         const same = await compare(req.body.password, user.password);
+
+         if (same) {
+            const TOKEN = sign({ email: user[0].email, accountType: user.accountType }, SK);
+            res.json({
+               TOKEN,
+               email: user.email,
+               id: user.id,
+               roles: user.roles
+            });
+         } else {
+            msg = "Mot de passe erroné. Contactez l'administrateur.";
+            res.status(409).json({ msg });
+         }
+      } else {
+         msg = "Wrong username";
+         res.status(409).json({ msg });
+      }
+   } catch (err) {
+      throw Error(err);
    }
 }
 
@@ -57,7 +116,7 @@ export const deleteUser = async (req, res) => {
 export const getUser = async (req, res, next) => {
    let user;
    try {
-      user = await user.findById(req.params.id);
+      user = await User.findById(req.params.id);
       if (!user) {
          return res.status(404).json({ message: "Cannot find the user." })
       }

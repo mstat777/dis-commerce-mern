@@ -1,11 +1,15 @@
 @use '../../global.scss' as *;
 
 .header {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
    height: $header-height;
    -webkit-box-sizing: border-box;
    -moz-box-sizing: border-box;
    box-sizing: border-box;
-   //background-color: $lightgrey-color-3;
+   background-color: $light-color;
    z-index: 100;
 
    .nav {
@@ -84,6 +88,17 @@
       .show_menu {
          transform: translateY(16rem) translateY($header-height);
          transition: transform 5s ease-out;
+      }
+
+      .sign_btn {
+         display: inline-flex;
+         align-items: center;
+         padding: 2px 6px;
+         //background-color: $darkgrey-color-1;
+
+         >span {
+            margin-left: 6px;
+         }
       }
    }
 }

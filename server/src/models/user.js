@@ -1,9 +1,26 @@
 import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
-   name: {
+   firstName: {
       type: String,
-      required: [true, "can't be blank"]
+      required: true
+   },
+   lastName: {
+      type: String,
+      required: true
+   },
+   email: {
+      type: String,
+      required: true,
+      unique: true
+   },
+   tel: {
+      type: String,
+      required: true
+   },
+   birthDate: {
+      type: String,
+      required: true
    },
    password: {
       type: String,
@@ -29,6 +46,10 @@ const userSchema = new Schema({
    },
    roles: [{
       type: String,
+      required: true
+   }],
+   newsLetter: [{
+      type: Boolean,
       required: true
    }],
    registerDate: {

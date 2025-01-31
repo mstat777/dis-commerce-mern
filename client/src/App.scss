@@ -26,6 +26,7 @@ body {
 
       main {
          height: calc(100vh - $header-height - $footer-height);
+         margin-top: $header-height;
          text-align: center;
       }
    }
