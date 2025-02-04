@@ -42,7 +42,7 @@ export default function Header() {
                className="sign_btn"
             >
                <FontAwesomeIcon icon={faUser}/>
-               <span>sign in</span>
+               <span>connexion</span>
             </NavLink>
          </nav>
       </header>

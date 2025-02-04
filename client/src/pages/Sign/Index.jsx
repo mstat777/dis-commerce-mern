@@ -41,6 +41,7 @@ export default function Sign(){
    const [inputDateType, setInputDateType] = useState("text");
    const [passInputType, setPassInputType] = useState("password"); // show/hide the pswd eye icon
    const [passIcon, setPassIcon] = useState(faEyeSlash);
+   const [okMsg, setOkMsg] = useState('');
    const [errMsg, setErrMsg] = useState('');
 
    function handlePassIconToggle() {
@@ -55,6 +56,7 @@ export default function Sign(){
 
    function handleOnFocus(){
       setErrMsg('');
+      setOkMsg('');
    }
 
    const handleInputChange = (e) => {
@@ -78,7 +80,10 @@ export default function Sign(){
          const res = await fetch(`${BASE_URL}/api/v.0.1/user/signin`, {
             method: "post",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ 
+               email: inputs.email, 
+               password: inputs.password 
+            }),
          });
          const json = await res.json();
          if(res.status === 200){
@@ -100,8 +105,8 @@ export default function Sign(){
          setErrMsg(json.msg);
          
          if (res.status === 201) {
-            dispatch(setLogMessage("Votre compte a bien été créé.\nVous pouvez désormais vous connecter."));
-            navigate("/user/signin");
+            setOkMsg("Votre compte a bien été créé.\nVous pouvez désormais vous connecter.");
+            navigate("/signin");
          } else {
             console.log(json.errors);
          }
@@ -111,8 +116,10 @@ export default function Sign(){
    return (
       <main className="sign">
          <section className="sign_section">
-
-            { errMsg && <p className="err_msg">{errMsg}</p> }
+            { okMsg && 
+               <p className={styles.ok_msg}>{okMsg}</p> }
+            { errMsg && 
+               <p className="err_msg">{errMsg}</p> }
             
             { signin ? 
                <h1>Se connecter</h1> : 

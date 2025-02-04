@@ -45,9 +45,8 @@ export const createUser = async (req, res) => {
             email: req.body.email,
             tel: req.body.tel,
             birthDate: req.body.birthDate,
-            password: await hash(req.body.birthDate, SALT),
+            password: await hash(req.body.password, SALT),
             address: req.body.address,
-            roles: req.body.roles,
             newsLetter: req.body.newsLetter
          });
          const newUser = await user.save();
@@ -64,10 +63,19 @@ export const logUser = async (req, res) => {
       const user = await User.findOne({ email: req.body.email });
       // if user is found in the DB
       if (user) {
-         const same = await compare(req.body.password, user.password);
+         //console.log(user);
+         console.log(req.body.password);
+         console.log(user.password);
+         const match = await compare(req.body.password, user.password);
+         console.log(match);
 
-         if (same) {
-            const TOKEN = sign({ email: user[0].email, accountType: user.accountType }, SK);
+         if (match) {
+            const TOKEN = sign(
+               {
+                  email: user.email,
+                  accountType: user.accountType
+               },
+               SK);
             res.json({
                TOKEN,
                email: user.email,

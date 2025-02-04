@@ -38,15 +38,7 @@ const productSchema = new Schema({
          type: String,
          default: null
       },
-      design: {
-         type: String,
-         default: null
-      },
       size: {
-         type: String,
-         default: null
-      },
-      sizeCategories: {
          type: String,
          default: null
       },
@@ -84,6 +76,10 @@ const productSchema = new Schema({
          type: Number,
          required: true
       },
+      rating: {
+         type: Number,
+         default: 0
+      },
       productImagePath: {
          type: String,
          required: true
@@ -95,11 +91,7 @@ const productSchema = new Schema({
       productOtherImages: [{
          type: String,
          required: true
-      }],
-      rating: {
-         type: Number,
-         default: 0
-      }
+      }]
    }],
    registerDate: {
       type: Date,

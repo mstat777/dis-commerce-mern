@@ -1,0 +1,183 @@
+@use '../../global' as *;
+
+.admin {
+
+   .create_form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 1.5rem auto;
+      padding: 2.4rem;
+      font-size: 1.4rem;
+      background-color: $secondary-color-7;
+
+
+      >div {
+         display: flex;
+         align-items: flex-start;
+         justify-content: flex-start;
+         margin-bottom: 1.5rem;
+         border: none;
+
+         label {
+            display: inline-block;
+            width: 30%;
+            max-width: 250px;
+            margin-top: .5rem;
+            padding-right: .8rem;
+            text-align: right;
+            white-space: nowrap;
+            overflow: hidden;
+         }
+
+         >*:nth-child(2) {
+            display: inline-block;
+            width: 70%;
+            margin-left: .8rem;
+            margin-right: 0;
+            padding: .3rem .8rem;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: $darkgrey-color-4;
+         }
+
+         textarea {
+            height: 18rem;
+         }
+
+         input[type="file"] {
+            >span {
+               color: $nok-color;
+            }
+
+            &::file-selector-button {
+               margin-right: .8rem;
+               padding: .6rem 1rem .5rem;
+               border: none;
+               border-radius: 6rem;
+               font-size: 1.2rem;
+               font-weight: 500;
+               color: white;
+               letter-spacing: .1rem;
+               text-transform: uppercase;
+               background-color: $main-color-0;
+            }
+         }
+
+         input[type="file" i] {
+            font-family: $main-font;
+            font-weight: 400;
+            font-size: 1.4rem;
+         }
+      }
+   }
+
+   .search_form {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background-color: $main-color-8;
+
+      .buttons,
+      .field {
+         display: flex;
+         align-items: center;
+         width: 100%;
+         margin-bottom: 1.5rem;
+
+         >label {
+            white-space: nowrap;
+            font-weight: 600;
+         }
+
+         >input {
+            display: inline-block;
+            width: 100%;
+            padding: .8rem;
+            margin-left: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+         }
+      }
+
+      .buttons {
+         >button {
+            &:last-child {
+               font-weight: 700;
+               color: $main-color-3;
+               background-color: $lightgrey-color-2;
+            }
+         }
+      }
+
+      .msg_nok {
+         font-weight: 500;
+         color: $nok-color;
+      }
+   }
+
+   .results_table {
+      margin: 0 1.5rem;
+      color: $darkgrey-color-4;
+      background-color: $secondary-color-6;
+
+      th {
+         padding: .3rem .8rem;
+         background-color: $light-color;
+      }
+
+      tbody {
+         td {
+            padding: .3rem .8rem;
+            text-align: center;
+         }
+
+         td:first-child {
+            color: $lightgrey-color-1;
+         }
+
+         .description {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+         }
+      }
+
+      a {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin: 0 auto;
+         padding: .3rem .8rem;
+         border: none;
+         border-radius: .4rem;
+         text-transform: uppercase;
+         background-color: transparent;
+
+         .modify_icon {
+            margin-top: .1rem;
+            color: rgb(50, 124, 72);
+         }
+
+         .delete_icon {
+            color: $nok-color;
+         }
+      }
+
+      @media screen and (min-width: $desktop) {
+         max-width: 1200px;
+         margin: 0 auto;
+      }
+
+      .justify {
+         text-align: justify;
+      }
+   }
+}

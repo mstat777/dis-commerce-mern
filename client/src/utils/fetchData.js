@@ -9,3 +9,13 @@ export const fetchPromoProducts = async () => {
       console.log(err);
    }
 }
+
+// fetch vendors on admin products page
+export const fetchVendors = async () => {
+   try {
+      const result = await (await fetch(`${API_URL}/api/v.0.1/vendor`)).json();
+      return result;
+   } catch (err) {
+      console.log(err);
+   }
+}

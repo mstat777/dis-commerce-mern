@@ -46,12 +46,13 @@ const userSchema = new Schema({
    },
    roles: [{
       type: String,
-      required: true
+      required: true,
+      default: "user"
    }],
-   newsLetter: [{
+   newsLetter: {
       type: Boolean,
       required: true
-   }],
+   },
    registerDate: {
       type: Date,
       required: true,
