@@ -44,11 +44,11 @@ const userSchema = new Schema({
          required: true
       },
    },
-   roles: [{
+   roles: {
       type: String,
-      required: true,
+      required: false,
       default: "user"
-   }],
+   },
    newsLetter: {
       type: Boolean,
       required: true

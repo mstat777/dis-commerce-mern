@@ -17,7 +17,7 @@ export default function Sign(){
    const dispatch = useDispatch();
 
    const { pathname } = useLocation();
-   const signin = pathname.includes("signin") ? true : false;
+   const connexion = pathname.includes("connexion") ? true : false;
 
    const { isLogged } =  useSelector((state) => state.user);
    
@@ -75,8 +75,8 @@ export default function Sign(){
    async function handleSubmit(e){
       e.preventDefault();
 
-      if (signin){
-         // SIGNIN page form
+      if (connexion){
+         // page CONNEXION - formulaire
          const res = await fetch(`${BASE_URL}/api/v.0.1/user/signin`, {
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -94,7 +94,7 @@ export default function Sign(){
             setErrMsg(json.msg);
          }
       } else {
-         // SIGNUP page form
+         // page CREATION DE COMPTE - formulaire
          const res = await fetch(`${BASE_URL}/api/v.0.1/user/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -106,7 +106,7 @@ export default function Sign(){
          
          if (res.status === 201) {
             setOkMsg("Votre compte a bien été créé.\nVous pouvez désormais vous connecter.");
-            navigate("/signin");
+            navigate("/connexion");
          } else {
             console.log(json.errors);
          }
@@ -117,17 +117,17 @@ export default function Sign(){
       <main className="sign">
          <section className="sign_section">
             { okMsg && 
-               <p className={styles.ok_msg}>{okMsg}</p> }
+               <p className="ok_msg">{okMsg}</p> }
             { errMsg && 
                <p className="err_msg">{errMsg}</p> }
             
-            { signin ? 
+            { connexion ? 
                <h1>Se connecter</h1> : 
                <h1>Créer votre compte</h1> }
 
             <form onSubmit={handleSubmit} className="sign_form">
 
-               { !signin && 
+               { !connexion && 
                <>
                   <label> 
                      <FontAwesomeIcon icon={faUserReg} className="input_icon"/>  
@@ -168,7 +168,7 @@ export default function Sign(){
                   />
                </label>
 
-               { !signin && 
+               { !connexion && 
                <>
                   <label> 
                      <FontAwesomeIcon icon={faPhone} className="input_icon"/> 
@@ -250,7 +250,7 @@ export default function Sign(){
                   </button>    
                </label>
 
-               { !signin && 
+               { !connexion && 
                <>
                   <div> 
                      <label className="label_checkbox">
@@ -277,12 +277,12 @@ export default function Sign(){
                </>
                }
                
-               <MainBtn type="submit" text={signin ? "se connecter" : "s'inscrire"}/>
+               <MainBtn type="submit" text={connexion ? "se connecter" : "s'inscrire"}/>
             </form>
 
-            { signin ? 
-               <p>Vous n'avez pas encore de compte ?<Link to="/signup">En créer un</Link></p> :
-               <p>Vous avez déjà un compte ?<Link to="/signin">Se connecter</Link></p>
+            { connexion ? 
+               <p>Vous n'avez pas encore de compte ?<Link to="/creation-compte">En créer un</Link></p> :
+               <p>Vous avez déjà un compte ?<Link to="/connexion">Se connecter</Link></p>
             }
 
          </section>

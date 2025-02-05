@@ -1,0 +1,69 @@
+@use '../../../global' as *;
+
+.btn_with_popup {
+   position: relative;
+   display: inline-block;
+
+   button {
+      transition: all .3s;
+   }
+
+   >button {
+      display: block;
+      margin: 0 auto;
+      padding: 10px 12px 8px;
+      border: 1px solid $nok-color;
+      border-radius: 6px;
+      font-weight: 500;
+      color: $nok-color;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background-color: $light-color;
+
+      &:hover {
+         cursor: pointer;
+      }
+   }
+
+   .alert {
+      position: absolute;
+      top: -40px;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      padding: 10px;
+      border: 2px solid $nok-color;
+      border-radius: 10px;
+      background-color: $lightgrey-color-4;
+
+      >* {
+         display: inline-block;
+      }
+
+      p {
+         margin: 0 5px;
+         font-weight: 500;
+         white-space: nowrap;
+      }
+
+      button {
+         margin: 0 5px;
+         padding: 4px 6px;
+         border: 1px solid;
+         color: $main-color-3;
+         background-color: $light-color;
+
+         &:hover {
+            color: $light-color;
+            background-color: $dark-color;
+            opacity: .9;
+         }
+      }
+
+      .hide {
+         display: none;
+      }
+   }
+}

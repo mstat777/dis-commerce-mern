@@ -47,7 +47,7 @@ export default function SearchProduct(){
                   name="title" 
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  onFocus={() => dispatch(clearAllMsg)}
+                  onFocus={() => dispatch(clearAllMsg())}
                   placeholder="Nom de produit"
                />
             </div>
@@ -59,7 +59,7 @@ export default function SearchProduct(){
                   name="mainCategory" 
                   value={mainCategory}
                   onChange={(e) => setMainCategory(e.target.value)}
-                  onFocus={() => dispatch(clearAllMsg)}
+                  onFocus={() => dispatch(clearAllMsg())}
                   placeholder="Catégorie de produit"
                />
             </div>

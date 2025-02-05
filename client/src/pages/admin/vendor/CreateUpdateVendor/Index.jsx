@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { setMsg, setErrMsg } from "../../../../store/slices/messages";
+import MainBtn from "../../../../components/buttons/MainBtn/Index";
 
 export default function CreateUpdateVendor(){
    const BASE_URL = import.meta.env.VITE_API_URL;
 
    const dispatch = useDispatch();
-   const { msg, errMsg } = useSelector((state) => state.messages)
+   const { msg, errMsg } = useSelector((state) => state.messages);
+   const { data } = useSelector((state) => state.adminData);
 
    const { pathname } = useLocation();
    const create = pathname.includes("create") ? true : false;
@@ -23,6 +25,14 @@ export default function CreateUpdateVendor(){
       // not yet developed: will be developed later
       setIsValidated(true);
    }
+
+   // if MODIFY page, load inputs data
+   useEffect(() => {
+      if (!create) {
+         setName(data.name);
+         setAddress(data.address);
+      }
+   },[]);
 
    useEffect(() => {
       if (isValidated) {
@@ -65,6 +75,7 @@ export default function CreateUpdateVendor(){
    }
 
    return (
+    
       <main className="admin">
          <h1>{create ? "Ajouter un nouveau vendeur" : "Modifier un vendeur"}</h1>
 
@@ -84,13 +95,19 @@ export default function CreateUpdateVendor(){
 
             <div className="field">
                <label htmlFor="address">Adresse :</label>
-               <input 
+               <textarea 
                   type="text" 
                   name="address" 
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  rows="4"
                />
             </div>
+
+            <MainBtn 
+               type="submit" 
+               text="enregistrer"
+            />
 
             { errMsg && 
                <p className="err_msg">{errMsg}</p> }

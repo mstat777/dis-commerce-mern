@@ -12,7 +12,7 @@ import NotFound from './pages/NotFound/Index';
 import Admin from './pages/admin/Index';
 import SearchProduct from './pages/admin/product/SearchProduct/Index';
 import CreateUpdateProduct from './pages/admin/product/CreateUpdateProduct/Index';
-import SearchVendor from './pages/admin/vendor/SearchVendor/Index';
+import Vendor from './pages/admin/vendor/Index';
 import CreateUpdateVendor from './pages/admin/vendor/CreateUpdateVendor/Index';
 
 export default function App() {
@@ -26,23 +26,23 @@ export default function App() {
             
             <Routes>
                <Route index element={<Home />} />
-               <Route path="home" element={<Home />} />
-               <Route path="signin" element={<Sign />} />
-               <Route path="signup" element={<Sign />} />
+               <Route path="accueil" element={<Home />} />
+               <Route path="connexion" element={<Sign />} />
+               <Route path="creation-compte" element={<Sign />} />
 
                <Route path="admin">
                   <Route index element={<Admin />} />
 
-                  <Route path="product">
-                     <Route path="search" element={<SearchProduct />} />
-                     <Route path="create" element={<CreateUpdateProduct />} />
-                     <Route path="update" element={<CreateUpdateProduct />} />
+                  <Route path="produit">
+                     <Route index element={<SearchProduct />} />
+                     <Route path="creation" element={<CreateUpdateProduct />} />
+                     <Route path="mise-a-jour" element={<CreateUpdateProduct />} />
                   </Route>
 
-                  <Route path="vendor">
-                     <Route path="search" element={<SearchVendor />} />
-                     <Route path="create" element={<CreateUpdateVendor />} />
-                     <Route path="update" element={<CreateUpdateVendor />} />
+                  <Route path="vendeur">
+                     <Route index element={<Vendor />} />
+                     <Route path="creation" element={<CreateUpdateVendor />} />
+                     <Route path="mise-a-jour" element={<CreateUpdateVendor />} />
                   </Route>
                </Route>
 

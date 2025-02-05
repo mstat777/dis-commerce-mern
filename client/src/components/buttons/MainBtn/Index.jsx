@@ -1,7 +1,7 @@
 import "./MainBtn.scss";
 
 export default function MainBtn(props){
-   const { type, text, onClick } = props;
+   const { type, text, onClick, child } = props;
 
    return (
       <button
@@ -9,6 +9,7 @@ export default function MainBtn(props){
          onClick={onClick}
          className="main_btn">
             {text}
+            {child}
       </button>
    );
 }

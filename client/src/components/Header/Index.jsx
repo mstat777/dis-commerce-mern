@@ -23,14 +23,14 @@ export default function Header() {
                <ul className={`menu ${showMenu ? 'show_menu' : ''}`}>
                   <li>
                      <NavLink
-                        to={"/home"}
+                        to={"/accueil"}
                         onClick={() => setShowMenu(false)}
                      >accueil</NavLink>
                   </li>
 
                   <li>
                      <NavLink
-                        to={"/settings"}
+                        to={"/parametres"}
                         onClick={() => setShowMenu(false)}
                      >settings</NavLink>
                   </li>
@@ -38,7 +38,7 @@ export default function Header() {
             }
 
             <NavLink 
-               to={"/signin"}
+               to={"/connexion"}
                className="sign_btn"
             >
                <FontAwesomeIcon icon={faUser}/>

@@ -4,7 +4,6 @@ import cors from 'cors';
 import router from './routes/index.routes.js';
 import { connectDB } from './config/db.js';
 
-
 connectDB();
 
 const PORT = process.env.PORT || process.env.LOCAL_PORT;

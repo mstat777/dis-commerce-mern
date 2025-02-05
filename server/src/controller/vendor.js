@@ -15,7 +15,7 @@ export const getAllVendors = async (req, res) => {
 
 export const getVendorByName = async (req, res) => {
    try {
-      const vendors = await Product.find({ name: req.body.name });
+      const vendors = await Vendor.find({ name: req.body.name });
       res.json(vendors);
    } catch (err) {
       res.status(500).json({ message: err.message });

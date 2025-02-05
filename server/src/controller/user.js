@@ -1,6 +1,9 @@
 import User from "../models/user.js";
 import { hash, compare } from "bcrypt";
+import jsonwebtoken from "jsonwebtoken";
 
+const { sign } = jsonwebtoken;
+const { SK } = process.env;
 const SALT = 10;
 
 export const checkToken = async (req, res) => {

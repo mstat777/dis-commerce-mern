@@ -1,24 +1,34 @@
 import '../../Admin.scss';
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
-import { setErrMsg, clearAllMsg } from "../../../../store/slices/messages";
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { setMsg, setErrMsg, clearAllMsg } from "../../../../store/slices/messages";
+import { setData } from "../../../../store/slices/adminData";
 import MainBtn from "../../../../components/buttons/MainBtn/Index";
+import BtnWithConfirm from "../../../../components/buttons/BtnWithConfirm/Index";
+import { formatDate } from "../../../../utils/functions";
 
 export default function SearchVendor(){
    const BASE_URL = import.meta.env.VITE_API_URL;
 
+   const navigate = useNavigate();
    const dispatch = useDispatch();
-   const { msg } = useSelector((state) => state.messages);
+   const { msg, errMsg } = useSelector((state) => state.messages);
 
    const [name, setName] = useState(""); // search by product title
    const [results, setResults] = useState([]);
 
+   const handleModify = (idx) => {
+      console.log(results[idx]);
+      dispatch(setData(results[idx]));
+      navigate(`/admin/vendeur/mise-a-jour`);
+   }
+
    async function handleSubmit(e){
       e.preventDefault();
-
       const res = await fetch(`${BASE_URL}/api/v.0.1/vendor/name`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
@@ -28,13 +38,18 @@ export default function SearchVendor(){
       console.log(json);
       if(res.status === 200){
          setResults(json);
+         if (!json.length) {
+            dispatch(setMsg("Aucun résultat trouvé."));
+         } else {
+            dispatch(clearAllMsg());
+         }
       } else {
          dispatch(setErrMsg(json.msg));
       }
    }
 
    return (
-      <main className="admin">
+      <>
          <form 
             onSubmit={handleSubmit} 
             className="search_form"
@@ -46,7 +61,7 @@ export default function SearchVendor(){
                   name="name" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  onFocus={() => dispatch(clearAllMsg)}
+                  onFocus={() => clearAllMsg()}
                   placeholder="Nom du vendeur"
                />
             </div>
@@ -56,9 +71,12 @@ export default function SearchVendor(){
                <MainBtn type="button" text="effacer"/>
             </div>
 
-            { msg && 
-               <p className="msg_nok">{msg}</p> }
+            { errMsg && 
+               <p className="msg_nok">{errMsg}</p> }
          </form>
+
+         { msg && 
+               <p className="msg_ok">{msg}</p> }
 
          { results?.length > 0 &&
             <section className="results_section">
@@ -71,6 +89,8 @@ export default function SearchVendor(){
                         <th>Nom</th>
                         <th>Adresse</th>
                         <th>Date enregistré</th>
+                        <th>Modif.</th>
+                        <th>Suppr.</th>
                      </tr>
                   </thead>
 
@@ -80,11 +100,24 @@ export default function SearchVendor(){
                         <td>{i+1}</td>
                         <td><b>{product.name}</b></td>
                         <td>{product.address}</td>
-                        <td>{product.registerDate}</td>
+                        <td>{formatDate(product.registerDate)}</td>
                         <td>
-                           <Link to={`/admin/vendor/update`}>
+                           <button 
+                              type="button"
+                              onClick={() => handleModify(i)}
+                           >
                               <FontAwesomeIcon icon={faPencil} className="modify_icon"/>
-                           </Link>
+                           </button>
+                        </td>
+                        <td>
+                           <BtnWithConfirm 
+                              clickFunc={() => handleDelete(i)}
+                              child={
+                                 <FontAwesomeIcon 
+                                    icon={faTrashCan} className="delete_icon"
+                                 />
+                              }
+                           />
                         </td>
                      </tr>
                   )}
@@ -92,6 +125,6 @@ export default function SearchVendor(){
                </table>
             </section>
          }
-      </main>
+      </>
    )
 }

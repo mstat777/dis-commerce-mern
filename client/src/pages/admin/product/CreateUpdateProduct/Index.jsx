@@ -145,7 +145,7 @@ export default function CreateUpdateProduct(){
                   name="description" 
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-               ></textarea>
+               />
             </div>
 
             { errMsg && 
