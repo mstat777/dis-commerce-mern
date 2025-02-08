@@ -6,13 +6,14 @@ import MainBtn from "../../../../components/buttons/MainBtn/Index";
 
 export default function CreateUpdateVendor(){
    const BASE_URL = import.meta.env.VITE_API_URL;
+   const TOKEN = localStorage.getItem("auth");
 
    const dispatch = useDispatch();
    const { msg, errMsg } = useSelector((state) => state.messages);
    const { data } = useSelector((state) => state.adminData);
 
    const { pathname } = useLocation();
-   const create = pathname.includes("create") ? true : false;
+   const creation = pathname.includes("creation") ? true : false;
 
    const [name, setName] = useState("");
    const [address, setAddress] = useState("");
@@ -28,7 +29,7 @@ export default function CreateUpdateVendor(){
 
    // if MODIFY page, load inputs data
    useEffect(() => {
-      if (!create) {
+      if (!creation) {
          setName(data.name);
          setAddress(data.address);
       }
@@ -42,7 +43,7 @@ export default function CreateUpdateVendor(){
 
    const submitForm = async () => {
       // if CREATION of a new product:
-      if (create){
+      if (creation){
          const res = await fetch(`${BASE_URL}/api/v.0.1/vendor`, {
             method: "POST",
             headers: { Authentication: "Bearer " + TOKEN },
@@ -77,7 +78,7 @@ export default function CreateUpdateVendor(){
    return (
     
       <main className="admin">
-         <h1>{create ? "Ajouter un nouveau vendeur" : "Modifier un vendeur"}</h1>
+         <h1>{creation ? "Ajouter un nouveau vendeur" : "Modifier un vendeur"}</h1>
 
          <form 
             className="create_form"
@@ -112,7 +113,7 @@ export default function CreateUpdateVendor(){
             { errMsg && 
                <p className="err_msg">{errMsg}</p> }
             { msg && 
-               <p className="ok_msg">{okMsg}</p> }
+               <p className="ok_msg">{msg}</p> }
          </form>
       </main>
    )

@@ -11,7 +11,7 @@ export default function Vendor(){
          <p>
             Ajouter un nouveau vendeur : 
             <Link 
-               to={`/admin/vendor/create`}
+               to={`/admin/vendeur/creation`}
                className="link"
             >
                créer

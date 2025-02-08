@@ -6,6 +6,7 @@ import Header from './components/Header/Index';
 import Footer from './components/Footer/Index';
 import Home from './pages/Home/Index';
 import Sign from './pages/Sign/Index';
+import Signout from './pages/Sign/Signout/Index';
 import NotFound from './pages/NotFound/Index';
 
 // Admin pages
@@ -29,6 +30,7 @@ export default function App() {
                <Route path="accueil" element={<Home />} />
                <Route path="connexion" element={<Sign />} />
                <Route path="creation-compte" element={<Sign />} />
+               <Route path="deconnexion" element={<Signout />} />
 
                <Route path="admin">
                   <Route index element={<Admin />} />

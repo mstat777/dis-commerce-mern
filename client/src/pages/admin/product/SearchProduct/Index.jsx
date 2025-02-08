@@ -106,7 +106,7 @@ export default function SearchProduct(){
                         <td>{product.vendorId}</td>
                         <td>{product.status}</td>
                         <td>
-                           <Link to={`/admin/product/update`}>
+                           <Link to={`/admin/produit/mise-a-jour`}>
                               <FontAwesomeIcon icon={faPencil} className="modify_icon"/>
                            </Link>
                         </td>

@@ -1,10 +1,10 @@
 import './Sign.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../store/slices/user.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock, faEye, faEyeSlash, faPhone, faEnvelope, faLocationDot, faCakeCandles, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faEye, faEyeSlash, faPhone, faEnvelope, faLocationDot, faCakeCandles } from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserReg } from '@fortawesome/free-regular-svg-icons';
 import MainBtn from '../../components/buttons/MainBtn/Index';
 import Modal from '../../components/Modal/Index';
@@ -86,6 +86,7 @@ export default function Sign(){
             }),
          });
          const json = await res.json();
+         console.log(json);
          if(res.status === 200){
             localStorage.setItem("auth", json.TOKEN);
             dispatch(signin(json));
