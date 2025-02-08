@@ -13,6 +13,7 @@ import { formatDate } from "../../../../utils/functions";
 
 export default function SearchVendor(){
    const BASE_URL = import.meta.env.VITE_API_URL;
+   const TOKEN = localStorage.getItem("auth");
 
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -21,12 +22,7 @@ export default function SearchVendor(){
    const [name, setName] = useState(""); // search by product title
    const [results, setResults] = useState([]);
 
-   const handleModify = (idx) => {
-      console.log(results[idx]);
-      dispatch(setData(results[idx]));
-      navigate(`/admin/vendeur/mise-a-jour`);
-   }
-
+   // submit search form data
    async function handleSubmit(e){
       e.preventDefault();
       const res = await fetch(`${BASE_URL}/api/v.0.1/vendor/name`, {
@@ -46,6 +42,30 @@ export default function SearchVendor(){
       } else {
          dispatch(setErrMsg(json.msg));
       }
+   }
+
+   const handleModify = (idx) => {
+      console.log(results[idx]);
+      dispatch(setData(results[idx]));
+      navigate(`/admin/vendeur/mise-a-jour`);
+   }
+
+   const handleDelete = async (idx) => {
+      console.log({
+         name: results[idx].name
+      });
+      const res = await fetch(`${BASE_URL}/api/v.0.1/vendor/`, {
+         method: "DELETE",
+         headers: { 
+            Authentication: "Bearer " + TOKEN,
+            "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+            name: results[idx].name
+         })
+      });
+      const json = await res.json();
+      dispatch(res.status === 200 ? setMsg(json.msg) : setErrMsg(json.msg));
    }
 
    return (

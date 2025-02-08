@@ -30,7 +30,7 @@ export default function BtnWithConfirm(props){
                   type="button"
                   text="OUI"
                   onClick={() => {
-                     setShowAlert(false);
+                     setShowPopup(false);
                      clickFunc();
                   }}
                />

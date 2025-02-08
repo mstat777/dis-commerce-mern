@@ -1,11 +1,13 @@
 import './Home.scss';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { fetchPromoProducts } from '../../utils/fetchData';
 import ProductCard from '../../components/ProductCard/Index';
 
 export default function Home(){
-   const API_URL = import.meta.env.VITE_API_URL;
    const [products, setProducts] = useState([]);
+   const { isLogged, email } = useSelector((state) => state.user);
+   const TOKEN = localStorage.getItem("auth");
 
    useEffect(() => {
       async function fetchData() {
@@ -23,6 +25,12 @@ export default function Home(){
          fetchData();
       }
    },[]);
+
+   useEffect(() => {
+      console.log(isLogged);
+      console.log(email);
+      console.log(TOKEN);
+   },[isLogged, email]);
 
    return (
       <main className="home">

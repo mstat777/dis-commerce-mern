@@ -10,7 +10,7 @@ export const getAllProducts = async (req, res) => {
       const Products = await Product.find();
       res.json(Products);
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ msg: err.message });
    }
 }
 
@@ -19,7 +19,7 @@ export const getProductByTitle = async (req, res) => {
       const Products = await Product.find({ title: req.body.title });
       res.json(Products);
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ msg: err.message });
    }
 }
 
@@ -54,16 +54,16 @@ export const createProduct = async (req, res) => {
             res.status(201).json({ msg });
          }
       } catch (err) {
-         res.status(400).json({ message: err.message });
+         res.status(400).json({ msg: err.message });
       }
    });
 }
 
 export const updateProduct = async (req, res) => {
-   if (!req.body.title) {
+   if (req.body.title) {
       res.product.title = req.body.title;
    }
-   if (!req.body.address) {
+   if (req.body.address) {
       res.product.address = req.body.address;
    }
 
@@ -71,16 +71,16 @@ export const updateProduct = async (req, res) => {
       const updatedProduct = await res.product.save();
       res.json(updatedProduct);
    } catch (err) {
-      res.status(400).json({ message: err.message });
+      res.status(400).json({ msg: err.message });
    }
 }
 
 export const deleteProduct = async (req, res) => {
    try {
-      await res.product.remove();
-      res.json({ message: "product deleted." });
+      await res.product.deleteOne();
+      res.json({ msg: "Le produit a été supprimé de la BDD." });
    } catch (err) {
-      res.status(400).json({ message: err.message });
+      res.status(400).json({ msg: err.message });
    }
 }
 
@@ -90,10 +90,10 @@ export const getProduct = async (req, res, next) => {
    try {
       product = await Product.findById(req.params.id);
       if (!product) {
-         return res.status(404).json({ message: "Cannot find the product." })
+         return res.status(404).json({ msg: "Le produit n'a pas été trouvé" })
       }
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ msg: err.message });
    }
 
    res.product = product;

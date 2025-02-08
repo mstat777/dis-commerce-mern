@@ -44,9 +44,16 @@ export default function CreateUpdateVendor(){
    const submitForm = async () => {
       // if CREATION of a new product:
       if (creation){
-         const res = await fetch(`${BASE_URL}/api/v.0.1/vendor`, {
+         console.log({
+            name: name,
+            address: address
+         });
+         const res = await fetch(`${BASE_URL}/api/v.0.1/vendor/`, {
             method: "POST",
-            headers: { Authentication: "Bearer " + TOKEN },
+            headers: { 
+               Authentication: "Bearer " + TOKEN,
+               "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                name: name,
                address: address
@@ -58,7 +65,10 @@ export default function CreateUpdateVendor(){
       // if MODIFICATION of an existing product:
          const res = await fetch(`${BASE_URL}/api/v.0.1/vendor`, {
             method: "PATCH",
-            headers: { Authentication: "Bearer " + TOKEN },
+            headers: { 
+               Authentication: "Bearer " + TOKEN,
+               "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                name: name,
                address: address

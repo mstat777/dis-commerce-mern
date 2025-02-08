@@ -9,13 +9,13 @@ const SALT = 10;
 export const checkToken = async (req, res) => {
    try {
       res.json({
-         msg: "authentified",
+         msg: "authentifié",
          email: req.user.email,
          id: req.user.id,
          roles: req.user.roles
       });
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ msg: err.message });
    }
 }
 
@@ -28,7 +28,7 @@ export const getAllUsers = async (req, res) => {
       const users = await User.find();
       res.json(users);
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ msg: err.message });
    }
 }
 
@@ -39,7 +39,7 @@ export const createUser = async (req, res) => {
       console.log(user);
       if (user) {
          console.log("res.user.name = ", res.user.name);
-         msg = "User account already exists. Please log in.";
+         msg = "Un utilisateur avec cette adresse mail existe déjà. ";
          res.status(409).json({ msg });
       } else {
          const user = new User({
@@ -53,10 +53,10 @@ export const createUser = async (req, res) => {
             newsLetter: req.body.newsLetter
          });
          const newUser = await user.save();
-         res.status(201).json({ message: 'Registration successful' });
+         res.status(201).json({ msg: 'Utilisateur créé' });
       }
    } catch (err) {
-      res.status(400).json({ message: err.message });
+      res.status(400).json({ msg: err.message });
    }
 }
 
@@ -90,7 +90,7 @@ export const logUser = async (req, res) => {
             res.status(409).json({ msg });
          }
       } else {
-         msg = "Wrong username";
+         msg = "Mauvais identifiant";
          res.status(409).json({ msg });
       }
    } catch (err) {
@@ -99,10 +99,10 @@ export const logUser = async (req, res) => {
 }
 
 export const updateUser = async (req, res) => {
-   if (!req.body.name) {
+   if (req.body.name) {
       res.user.name = req.body.name;
    }
-   if (!req.body.address) {
+   if (req.body.address) {
       res.user.address = req.body.address;
    }
 
@@ -110,16 +110,16 @@ export const updateUser = async (req, res) => {
       const updatedUser = await res.user.save();
       res.json(updatedUser);
    } catch (err) {
-      res.status(400).json({ message: err.message });
+      res.status(400).json({ msg: err.message });
    }
 }
 
 export const deleteUser = async (req, res) => {
    try {
-      await res.user.remove();
-      res.json({ message: "User deleted." });
+      await res.user.deleteOne();
+      res.json({ msg: "Utilisateur supprimé" });
    } catch (err) {
-      res.status(400).json({ message: err.message });
+      res.status(400).json({ msg: err.message });
    }
 }
 
@@ -129,10 +129,10 @@ export const getUser = async (req, res, next) => {
    try {
       user = await User.findById(req.params.id);
       if (!user) {
-         return res.status(404).json({ message: "Cannot find the user." })
+         return res.status(404).json({ msg: "L'utilisateur n'a pas été trouvé" })
       }
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ msg: err.message });
    }
 
    res.user = user;

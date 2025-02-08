@@ -11,18 +11,18 @@ import {
 
 const router = Router();
 
-// get an Product/ all Products
+// get a vendor/ all vendors
 router.get("/", getAllVendors);
 router.get("/:id", getVendor, getOneVendor);
 router.post("/name", getVendorByName);
 
-// create an Product
+// create a vendor
 router.post("/", createVendor);
 
-// update an Product
+// update a vendor
 router.patch("/", getVendor, updateVendor);
 
-// delete an Product
-router.delete("/:id", getVendor, deleteVendor);
+// delete a vendor
+router.delete("/", getVendor, deleteVendor);
 
 export default router;
