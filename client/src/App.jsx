@@ -11,7 +11,7 @@ import NotFound from './pages/NotFound/Index';
 
 // Admin pages
 import Admin from './pages/admin/Index';
-import SearchProduct from './pages/admin/product/SearchProduct/Index';
+import Product from './pages/admin/product/Index';
 import CreateUpdateProduct from './pages/admin/product/CreateUpdateProduct/Index';
 import Vendor from './pages/admin/vendor/Index';
 import CreateUpdateVendor from './pages/admin/vendor/CreateUpdateVendor/Index';
@@ -36,7 +36,7 @@ export default function App() {
                   <Route index element={<Admin />} />
 
                   <Route path="produit">
-                     <Route index element={<SearchProduct />} />
+                     <Route index element={<Product />} />
                      <Route path="creation" element={<CreateUpdateProduct />} />
                      <Route path="mise-a-jour" element={<CreateUpdateProduct />} />
                   </Route>

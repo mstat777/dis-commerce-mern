@@ -11,7 +11,6 @@ export default function CreateUpdateVendor(){
    const dispatch = useDispatch();
    const { msg, errMsg } = useSelector((state) => state.messages);
    const { data } = useSelector((state) => state.adminData);
-
    const { pathname } = useLocation();
    const creation = pathname.includes("creation") ? true : false;
 
@@ -20,12 +19,6 @@ export default function CreateUpdateVendor(){
 
    // control form inputs validation:
    const [isValidated, setIsValidated] = useState(false);
-
-   // verify all inputs before sending the form data :
-   const checkFormValidation = () => {
-      // not yet developed: will be developed later
-      setIsValidated(true);
-   }
 
    // if MODIFY page, load inputs data
    useEffect(() => {
@@ -40,6 +33,12 @@ export default function CreateUpdateVendor(){
          submitForm();
       }
    },[isValidated]);
+
+   // verify all inputs before sending the form data :
+   const checkFormValidation = () => {
+      // not yet developed: will be developed later
+      setIsValidated(true);
+   }
 
    const submitForm = async () => {
       // if CREATION of a new product:

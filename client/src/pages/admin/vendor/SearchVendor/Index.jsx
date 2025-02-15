@@ -81,7 +81,7 @@ export default function SearchVendor(){
                   name="name" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  onFocus={() => clearAllMsg()}
+                  onFocus={() => dispatch(clearAllMsg())}
                   placeholder="Nom du vendeur"
                />
             </div>
@@ -96,7 +96,7 @@ export default function SearchVendor(){
          </form>
 
          { msg && 
-               <p className="msg_ok">{msg}</p> }
+            <p className="msg_ok">{msg}</p> }
 
          { results?.length > 0 &&
             <section className="results_section">

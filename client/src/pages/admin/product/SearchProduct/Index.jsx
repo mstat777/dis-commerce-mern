@@ -1,17 +1,22 @@
 import '../../Admin.scss';
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
-import { setErrMsg, clearAllMsg } from "../../../../store/slices/messages";
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { setMsg, setErrMsg, clearAllMsg } from "../../../../store/slices/messages";
+import { setData } from "../../../../store/slices/adminData";
 import MainBtn from "../../../../components/buttons/MainBtn/Index";
+import BtnWithConfirm from "../../../../components/buttons/BtnWithConfirm/Index";
 
 export default function SearchProduct(){
    const BASE_URL = import.meta.env.VITE_API_URL;
+   const TOKEN = localStorage.getItem("auth");
 
+   const navigate = useNavigate();
    const dispatch = useDispatch();
-   const { msg } = useSelector((state) => state.messages);
+   const { msg, errMsg } = useSelector((state) => state.messages);
 
    const [title, setTitle] = useState(""); // search by product title
    const [mainCategory, setMainCategory] = useState(""); // search by product title
@@ -19,7 +24,6 @@ export default function SearchProduct(){
 
    async function handleSubmit(e){
       e.preventDefault();
-
       const res = await fetch(`${BASE_URL}/api/v.0.1/product/title`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
@@ -29,13 +33,42 @@ export default function SearchProduct(){
       console.log(json);
       if(res.status === 200){
          setResults(json);
+         if (!json.length) {
+            dispatch(setMsg("Aucun résultat trouvé."));
+         } else {
+            dispatch(clearAllMsg());
+         }
       } else {
          dispatch(setErrMsg(json.msg));
       }
    }
 
+   const handleModify = (idx) => {
+      console.log(results[idx]);
+      dispatch(setData(results[idx]));
+      navigate(`/admin/produit/mise-a-jour`);
+   }
+
+   const handleDelete = async (idx) => {
+      console.log({
+         name: results[idx].title
+      });
+      const res = await fetch(`${BASE_URL}/api/v.0.1/product/`, {
+         method: "DELETE",
+         headers: { 
+            Authentication: "Bearer " + TOKEN,
+            "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+            name: results[idx].title
+         })
+      });
+      const json = await res.json();
+      dispatch(res.status === 200 ? setMsg(json.msg) : setErrMsg(json.msg));
+   }
+
    return (
-      <main className="admin">
+      <>
          <form 
             onSubmit={handleSubmit} 
             className="search_form"
@@ -69,9 +102,12 @@ export default function SearchProduct(){
                <MainBtn type="button" text="effacer"/>
             </div>
 
-            { msg && 
-               <p className="msg_nok">{msg}</p> }
+            { errMsg && 
+               <p className="msg_nok">{errMsg}</p> }
          </form>
+
+         { msg && 
+            <p className="msg_ok">{msg}</p> }
 
          { results?.length > 0 &&
             <section className="results_section">
@@ -88,7 +124,8 @@ export default function SearchProduct(){
                         <th>Description</th>
                         <th>Vendeur</th>
                         <th>Statut</th>
-                        <th>Modifier</th>
+                        <th>Modif.</th>
+                        <th>Suppr.</th>
                      </tr>
                   </thead>
 
@@ -106,9 +143,22 @@ export default function SearchProduct(){
                         <td>{product.vendorId}</td>
                         <td>{product.status}</td>
                         <td>
-                           <Link to={`/admin/produit/mise-a-jour`}>
+                           <button 
+                              type="button"
+                              onClick={() => handleModify(i)}
+                           >
                               <FontAwesomeIcon icon={faPencil} className="modify_icon"/>
-                           </Link>
+                           </button>
+                        </td>
+                        <td>
+                           <BtnWithConfirm 
+                              clickFunc={() => handleDelete(i)}
+                              child={
+                                 <FontAwesomeIcon 
+                                    icon={faTrashCan} className="delete_icon"
+                                 />
+                              }
+                           />
                         </td>
                      </tr>
                   )}
@@ -116,6 +166,6 @@ export default function SearchProduct(){
                </table>
             </section>
          }
-      </main>
+      </>
    )
 }

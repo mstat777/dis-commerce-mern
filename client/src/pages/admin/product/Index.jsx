@@ -1,10 +1,24 @@
 import '../Admin.scss';
+import { Link } from 'react-router-dom';
+import SearchProduct from './SearchProduct/Index';
 
-export default function CreateUpdateProduct(){
+export default function Product(){
 
    return (
       <main className="admin">
-         PRODUITS
+         <h1>produits</h1>
+
+         <p>
+            Ajouter un nouveau produit : 
+            <Link 
+               to={`/admin/produit/creation`}
+               className="link"
+            >
+               créer
+            </Link>
+         </p>
+
+         <SearchProduct />
       </main>
    )
 }
