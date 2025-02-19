@@ -18,21 +18,21 @@ export default function CreateUpdateProduct(){
       title: "",
       subtitle: "",
       mainCategory: "",
-      subcategory: "",
+      subCategory: "",
       description: "",
-      vendorId: null,
+      vendorId: undefined,
       status: "",
       color: "",
       size: "",
       quantity: "",
       sku: "",
-      weight: null,
-      width: null,
-      length: null,
-      height: null,
-      productPrice: null,
-      discount: null,
-      rating: null,
+      weight: undefined,
+      width: undefined,
+      length: undefined,
+      height: undefined,
+      productPrice: undefined,
+      discount: undefined,
+      rating: undefined,
       productImagePath: ""
    });
 
@@ -42,6 +42,8 @@ export default function CreateUpdateProduct(){
    const [vendors, setVendors] = useState([]);
 
    const handleInputChange = (e) => {
+      console.log(e.target.name);
+      console.log(e.target.value);
       setInputs({ ...inputs, [e.target.name]: e.target.value });
    };
 
@@ -67,7 +69,7 @@ export default function CreateUpdateProduct(){
          const res = await fetch(`${BASE_URL}/api/v.0.1/vendor`);
          const json = await res.json();
          console.log(json);
-         dispatch(res.status === 200 ? setVendors(json) : setErrMsg(json.msg));
+         res.status === 200 ? setVendors(json) : dispatch(setErrMsg(json.msg));
       }
 
       if (!vendors.length) {
@@ -86,21 +88,21 @@ export default function CreateUpdateProduct(){
       formData.append('title', inputs.title);
       formData.append('subtitle', inputs.subtitle);
       formData.append('mainCategory', inputs.mainCategory);
-      formData.append('subcategory', inputs.subcategory);
+      formData.append('subCategory', inputs.subCategory);
       formData.append('description', inputs.description);
-      formData.append('vendorId', inputs.vendorId);
+      inputs.vendorId && formData.append('vendorId', inputs.vendorId);
       formData.append('status', inputs.status);
       formData.append('color', inputs.color);
       formData.append('size', inputs.size);
       formData.append('quantity', inputs.quantity);
       formData.append('sku', inputs.sku);
-      formData.append('weight', inputs.weight);
-      formData.append('width', inputs.width);
-      formData.append('length', inputs.length);
-      formData.append('height', inputs.height);
-      formData.append('productPrice', inputs.productPrice);
-      formData.append('discount', inputs.discount);
-      formData.append('rating', inputs.rating);
+      inputs.weight && formData.append('weight', inputs.weight);
+      inputs.width && formData.append('width', inputs.width);
+      inputs.length && formData.append('length', inputs.length);
+      inputs.height && formData.append('height', inputs.height);
+      inputs.productPrice && formData.append('productPrice', inputs.productPrice);
+      inputs.discount && formData.append('discount', inputs.discount);
+      inputs.rating && formData.append('rating', inputs.rating);
       formData.append('productMainImage', productMainImage);
       [...productOtherImages].forEach((file, idx) => {
          formData.append(`file-${idx}`, file, file.name);
@@ -138,7 +140,7 @@ export default function CreateUpdateProduct(){
       <main className="admin">
          <h1>{creation ? "Créer un nouveau produit" : "Modifier un produit"}</h1>
 
-         { vendors &&
+         { vendors.length &&
             <form 
                className="create_form"
                onSubmit={handleSubmit} 
@@ -175,11 +177,11 @@ export default function CreateUpdateProduct(){
                </div>
 
                <div className="field">
-                  <label htmlFor="subcategory">Sous-catégorie :</label>
+                  <label htmlFor="subCategory">Sous-catégorie :</label>
                   <input 
                      type="text" 
-                     name="subcategory" 
-                     value={inputs.subcategory}
+                     name="subCategory" 
+                     value={inputs.subCategory}
                      onChange={handleInputChange}
                   />
                </div>
@@ -192,16 +194,17 @@ export default function CreateUpdateProduct(){
                      onChange={handleInputChange}
                   />
                </div>
-
+               { console.log(vendors[0])}
                <div className="field">
                   <label htmlFor="vendorId">ID vendeur :</label>
                   <select 
                      name="vendorId" 
-                     defaultValue="0"
+                     value={inputs.vendorId}
+                     defaultValue={vendors[0]._id}
                      onChange={handleInputChange}
                   >
                      {vendors.map((vendor) => (
-                        <option value={vendor.id} key={vendor.id}>{vendor.name}</option>
+                        <option value={vendor._id} key={vendor._id}>{vendor.name}</option>
                      ))}
                   </select>
                </div>

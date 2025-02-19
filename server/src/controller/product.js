@@ -35,10 +35,11 @@ export const createProduct = async (req, res) => {
       try {
          let msg;
          const product = new Product();
+
          for (const key in fields) {
             product[key] = fields[key][0];
          }
-
+         //console.log(product);
          // verify if there is already a product with the same name in the DB:
          const productExist = await Product.findOne({ title: product.title });
 
@@ -46,14 +47,18 @@ export const createProduct = async (req, res) => {
             msg = "Un produit avec ce nom existe déjà !";
             res.status(409).json({ msg });
          } else {
-            product.productMainImage = files.file[0].newFilename;
+            console.log(files);
+            //product.productMainImage = files.file[0].newFilename;
 
-            await Product.save();
+            await product.save()
+               .then(res => console.log(res))
+               .catch(err => console.log(err));
 
             msg = "Le produit a été créé.";
             res.status(201).json({ msg });
          }
       } catch (err) {
+         console.log(err);
          res.status(400).json({ msg: err.message });
       }
    });
