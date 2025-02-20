@@ -80,19 +80,18 @@ const productSchema = new Schema({
          type: Number,
          default: 0
       },
-      productImagePath: {
-         type: String,
-         required: true
-      },
       productMainImage: {
          type: String,
          required: true
       },
       productOtherImages: [{
-         type: String,
-         required: true
+         type: String
       }]
    }],
+   productImagePath: {
+      type: String,
+      required: true
+   },
    registerDate: {
       type: Date,
       required: true,

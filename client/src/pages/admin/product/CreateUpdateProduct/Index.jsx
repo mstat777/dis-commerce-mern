@@ -20,20 +20,19 @@ export default function CreateUpdateProduct(){
       mainCategory: "",
       subCategory: "",
       description: "",
-      vendorId: undefined,
+      vendorId: "",
       status: "",
       color: "",
       size: "",
       quantity: "",
       sku: "",
-      weight: undefined,
-      width: undefined,
-      length: undefined,
-      height: undefined,
-      productPrice: undefined,
-      discount: undefined,
-      rating: undefined,
-      productImagePath: ""
+      weight: "",
+      width: "",
+      length: "",
+      height: "",
+      productPrice: "",
+      discount: "",
+      rating: "",
    });
 
    const [productMainImage, setProductMainImage] = useState("");
@@ -42,8 +41,8 @@ export default function CreateUpdateProduct(){
    const [vendors, setVendors] = useState([]);
 
    const handleInputChange = (e) => {
-      console.log(e.target.name);
-      console.log(e.target.value);
+      //console.log(e.target.name);
+      //console.log(e.target.value);
       setInputs({ ...inputs, [e.target.name]: e.target.value });
    };
 
@@ -68,7 +67,7 @@ export default function CreateUpdateProduct(){
       const getVendors = async () => {
          const res = await fetch(`${BASE_URL}/api/v.0.1/vendor`);
          const json = await res.json();
-         console.log(json);
+         //console.log(json);
          res.status === 200 ? setVendors(json) : dispatch(setErrMsg(json.msg));
       }
 
@@ -104,15 +103,17 @@ export default function CreateUpdateProduct(){
       inputs.discount && formData.append('discount', inputs.discount);
       inputs.rating && formData.append('rating', inputs.rating);
       formData.append('productMainImage', productMainImage);
-      [...productOtherImages].forEach((file, idx) => {
-         formData.append(`file-${idx}`, file, file.name);
+      [...productOtherImages].forEach((file, i) => {
+         formData.append(`file-${i}`, file, file.name);
       });
 
       // if CREATION of a new product:
       if (creation){
          const res = await fetch(`${BASE_URL}/api/v.0.1/product`, {
             method: "POST",
-            headers: { Authentication: "Bearer " + TOKEN },
+            headers: { 
+               Authentication: "Bearer " + TOKEN
+            },
             body: formData
          });
          const json = await res.json();
@@ -194,15 +195,15 @@ export default function CreateUpdateProduct(){
                      onChange={handleInputChange}
                   />
                </div>
-               { console.log(vendors[0])}
+
                <div className="field">
                   <label htmlFor="vendorId">ID vendeur :</label>
                   <select 
                      name="vendorId" 
                      value={inputs.vendorId}
-                     defaultValue={vendors[0]._id}
                      onChange={handleInputChange}
                   >
+                     <option value=''></option>
                      {vendors.map((vendor) => (
                         <option value={vendor._id} key={vendor._id}>{vendor.name}</option>
                      ))}
@@ -325,16 +326,6 @@ export default function CreateUpdateProduct(){
                      type="text" 
                      name="rating" 
                      value={inputs.rating}
-                     onChange={handleInputChange}
-                  />
-               </div>
-
-               <div className="field">
-                  <label htmlFor="productImagePath">URL image :</label>
-                  <input 
-                     type="text" 
-                     name="productImagePath" 
-                     value={inputs.productImagePath}
                      onChange={handleInputChange}
                   />
                </div>

@@ -1,5 +1,6 @@
 import Product from "../models/product.js";
 import formidable from "formidable";
+import { createProductImagePath } from "../utils/functions.js";
 
 export const getOneProduct = (req, res) => {
    res.send(res.product);
@@ -35,11 +36,8 @@ export const createProduct = async (req, res) => {
       try {
          let msg;
          const product = new Product();
-
-         for (const key in fields) {
-            product[key] = fields[key][0];
-         }
-         //console.log(product);
+         //console.log(fields);
+         product.title = fields.title[0];
          // verify if there is already a product with the same name in the DB:
          const productExist = await Product.findOne({ title: product.title });
 
@@ -47,6 +45,14 @@ export const createProduct = async (req, res) => {
             msg = "Un produit avec ce nom existe déjà !";
             res.status(409).json({ msg });
          } else {
+            for (const key in fields) {
+               //console.log(key);
+               product[key] = fields[key][0];
+            }
+
+            product.productImagePath = createProductImagePath(product.mainCategory, product.subCategory);
+
+            console.log(product);
             console.log(files);
             //product.productMainImage = files.file[0].newFilename;
 
