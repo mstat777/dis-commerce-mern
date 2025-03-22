@@ -1,5 +1,5 @@
 import './Header.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import BurgerBtn from '../buttons/BurgerBtn/Index';
 import logo from '../../assets/img/logo.png';
@@ -8,12 +8,9 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from 'react-redux';
 
 export default function Header() {
+   const TOKEN = localStorage.getItem("auth");
    const { isLogged } = useSelector((state) => state.user);
    const [showMenu, setShowMenu] = useState(false);
-
-   useEffect(() => {
-      console.log(isLogged);
-   },[isLogged]);
 
    return (
       <header className="header">
@@ -44,11 +41,11 @@ export default function Header() {
             }
 
             <NavLink 
-               to={isLogged ? "/deconnexion" : "/connexion"}
+               to={TOKEN || isLogged ? "/deconnexion" : "/connexion"}
                className="sign_btn"
             >
                <FontAwesomeIcon icon={faUser}/>
-               <span>{isLogged ? "déconnexion" : "connexion"}</span>
+               <span>{TOKEN || isLogged  ? "déconnexion" : "connexion"}</span>
             </NavLink>
          </nav>
       </header>

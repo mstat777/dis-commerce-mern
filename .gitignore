@@ -7,5 +7,6 @@ client/public/img
 #server
 server/node_modules
 server/.env
+server/public
 
 #misc

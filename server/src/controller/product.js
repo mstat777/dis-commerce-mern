@@ -1,5 +1,7 @@
-import Product from "../models/product.js";
+import { Product } from "../models/product.js";
 import formidable from "formidable";
+import fs from "fs";
+import path from "path";
 import { createProductImagePath } from "../utils/functions.js";
 
 export const getOneProduct = (req, res) => {
@@ -34,9 +36,20 @@ export const createProduct = async (req, res) => {
 
    form.parse(req, async (err, fields, files) => {
       try {
+         let oldPath = files.productMainImage.filepath;
+         let newPath = path.join('public', 'uploads')
+            + '/' + files.productMainImage.name;
+         let rawData = fs.readFileSync(oldPath);
+
+         fs.writeFile(newPath, rawData, function (err) {
+            if (err) console.log(err);
+            //return res.send("Successfully uploaded");
+         })
+
          let msg;
          const product = new Product();
          //console.log(fields);
+
          product.title = fields.title[0];
          // verify if there is already a product with the same name in the DB:
          const productExist = await Product.findOne({ title: product.title });
@@ -52,10 +65,23 @@ export const createProduct = async (req, res) => {
 
             product.productImagePath = createProductImagePath(product.mainCategory, product.subCategory);
 
-            console.log(product);
-            console.log(files);
-            //product.productMainImage = files.file[0].newFilename;
+            const images = Object.values(files);
+            //console.log(images);
 
+            images.forEach((image, i) => {
+               const imageData = {
+                  newFilename: image[0].newFilename,
+                  originalFilename: image[0].originalFilename,
+                  lastModifiedDate: image[0].lastModifiedDate
+               }
+               if (i !== 0) {
+                  product.productOtherImages.push(imageData);
+               } else {
+                  product.productMainImage = imageData;
+               }
+            });
+
+            console.log(product);
             await product.save()
                .then(res => console.log(res))
                .catch(err => console.log(err));

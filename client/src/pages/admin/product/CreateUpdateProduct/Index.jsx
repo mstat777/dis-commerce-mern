@@ -92,7 +92,7 @@ export default function CreateUpdateProduct(){
       inputs.vendorId && formData.append('vendorId', inputs.vendorId);
       formData.append('status', inputs.status);
       formData.append('color', inputs.color);
-      formData.append('size', inputs.size);
+      inputs.size && formData.append('size', inputs.size);
       formData.append('quantity', inputs.quantity);
       formData.append('sku', inputs.sku);
       inputs.weight && formData.append('weight', inputs.weight);
@@ -106,6 +106,10 @@ export default function CreateUpdateProduct(){
       [...productOtherImages].forEach((file, i) => {
          formData.append(`file-${i}`, file, file.name);
       });
+
+      /*for(var pair of formData.entries()) {
+         console.log(pair[0]+ ', '+ pair[1]); 
+      }*/
 
       // if CREATION of a new product:
       if (creation){

@@ -29,7 +29,80 @@ const productSchema = new Schema({
       type: String,
       default: 'under review'
    },
-   variations: [{
+   quantity: {
+      type: Number,
+      default: null
+   },
+   sku: {
+      type: String,
+      required: true
+   },
+   productPrice: {
+      type: Number,
+   },
+   discount: {
+      type: Number,
+   },
+   rating: {
+      type: Number,
+      default: 0
+   },
+   productImagePath: {
+      type: String,
+      required: true
+   },
+   productMainImage: {
+      newFilename: {
+         type: String,
+         required: true
+      },
+      originalFilename: {
+         type: String,
+         required: true
+      },
+      lastModifiedDate: {
+         type: String,
+         required: true,
+      }
+   },
+   productOtherImages: [{
+      newFilename: {
+         type: String,
+         required: true
+      },
+      originalFilename: {
+         type: String,
+         required: true
+      },
+      lastModifiedDate: {
+         type: String,
+         required: true,
+      }
+   }],
+   registerDate: {
+      type: Date,
+      required: true,
+      default: Date.now
+   }
+});
+
+export const Product = model('Product', productSchema);
+
+// ------------- Child Schemas -------------- //
+
+// Electronic schema
+export const ElectronicProduct = Product.discriminator('Electronic',
+   new Schema({
+      color: {
+         type: String,
+         default: null
+      },
+   })
+);
+
+// Clothing schema
+export const ClothingProduct = Product.discriminator('Clothing',
+   new Schema({
       color: {
          type: String,
          default: null
@@ -42,17 +115,25 @@ const productSchema = new Schema({
          type: String,
          default: null
       },
-      quantity: {
-         type: Number,
-         default: null
-      },
-      sku: {
-         type: String,
-         required: true
-      },
+   })
+);
+
+// Food schema
+export const FoodProduct = Product.discriminator('Food',
+   new Schema({
       weight: {
          type: Number,
          default: 0 // in gm
+      },
+   })
+);
+
+// Furniture schema
+export const FurnitureProduct = Product.discriminator('Furniture',
+   new Schema({
+      color: {
+         type: String,
+         default: null
       },
       dimension: {
          width: {
@@ -68,35 +149,5 @@ const productSchema = new Schema({
             default: 0 // in cm
          }
       },
-      productPrice: {
-         type: Number,
-         required: true
-      },
-      discount: {
-         type: Number,
-         required: true
-      },
-      rating: {
-         type: Number,
-         default: 0
-      },
-      productMainImage: {
-         type: String,
-         required: true
-      },
-      productOtherImages: [{
-         type: String
-      }]
-   }],
-   productImagePath: {
-      type: String,
-      required: true
-   },
-   registerDate: {
-      type: Date,
-      required: true,
-      default: Date.now
-   }
-});
-
-export default model('Product', productSchema);
+   })
+);
