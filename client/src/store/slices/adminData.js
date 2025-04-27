@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const adminDataSlice = createSlice({
-   name: "messages",
+   name: "adminData",
    initialState,
    reducers: {
       setData: (state, action) => {

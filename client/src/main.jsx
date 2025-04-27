@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
    <StrictMode>
       <Provider store={store}>
          <BrowserRouter>
-            <ScrollToTop />
+            {/*<ScrollToTop />*/}
             <App />
          </BrowserRouter>
       </Provider>

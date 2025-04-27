@@ -2,9 +2,16 @@ import './ProductCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 import StarsRating from '../StarsRating/Index';
+import { addToCart } from '../../store/slices/cart';
+import { useDispatch } from 'react-redux';
 
 export default function ProductCard({data}){
    const IMG_URL = import.meta.env.VITE_IMG_URL;
+   const dispatch = useDispatch();
+
+   const addItemToCart = () => {
+      dispatch(addToCart(data));
+   }
 
    return (
       Object.values(data).length &&
@@ -31,7 +38,7 @@ export default function ProductCard({data}){
 
          <div className="price_and_cart_ctn">
             <span>{data.productPrice}€</span>
-            <button>
+            <button onClick={addItemToCart}>
                <FontAwesomeIcon icon={faBasketShopping} />
             </button>
          </div>

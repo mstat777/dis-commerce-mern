@@ -9,6 +9,10 @@ import Sign from './pages/Sign/Index';
 import Signout from './pages/Sign/Signout/Index';
 import NotFound from './pages/NotFound/Index';
 
+// User pages
+import UserInfo from './pages/user/UserInfo/Index';
+import UserCart from './pages/user/UserCart/Index';
+
 // Admin pages
 import Admin from './pages/admin/Index';
 import Product from './pages/admin/product/Index';
@@ -31,6 +35,11 @@ export default function App() {
                <Route path="connexion" element={<Sign />} />
                <Route path="creation-compte" element={<Sign />} />
                <Route path="deconnexion" element={<Signout />} />
+
+               <Route path="utilisateur">
+                  <Route path="info" element={<UserInfo />} />
+                  <Route path="panier" element={<UserCart />} />
+               </Route>
 
                <Route path="admin">
                   <Route index element={<Admin />} />

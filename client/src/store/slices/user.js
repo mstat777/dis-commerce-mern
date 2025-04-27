@@ -11,14 +11,19 @@ export const userSlice = createSlice({
    name: "user",
    initialState,
    reducers: {
-      signin: (action) => {
+      signin: (state, action) => {
          console.log(action.payload);
-         return {
+         /*return {
             isLogged: true,
             email: action.payload.email,
             id: action.payload.id,
             roles: action.payload.roles
-         }
+         }*/
+         state.isLogged = true;
+         state.email = action.payload.email;
+         state.id = action.payload.id;
+         state.roles = action.payload.roles;
+         console.log(state.email);
       },
       signout: () => {
          return initialState;

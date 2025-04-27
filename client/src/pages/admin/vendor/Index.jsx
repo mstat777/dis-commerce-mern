@@ -12,10 +12,14 @@ export default function Vendor(){
             Ajouter un nouveau vendeur : 
             <Link 
                to={`/admin/vendeur/creation`}
-               className="link"
-            >
-               créer
-            </Link>
+               className="link">créer</Link>
+         </p>
+
+         <p>
+            Retour au 
+            <Link 
+               to={`/admin`}
+               className="link">tableau de bord</Link>
          </p>
 
          <SearchVendor />

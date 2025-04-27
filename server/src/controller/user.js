@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import { User } from "../models/user.js";
 import { hash, compare } from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 
@@ -20,6 +20,8 @@ export const checkToken = async (req, res) => {
 }
 
 export const getOneUser = (req, res) => {
+   console.log("res.user = ");
+   console.log(res.user);
    res.send(res.user);
 }
 
@@ -66,7 +68,7 @@ export const logUser = async (req, res) => {
       const user = await User.findOne({ email: req.body.email });
       // if user is found in the DB
       if (user) {
-         //console.log(user);
+         console.log(user.id);
          console.log(req.body.password);
          console.log(user.password);
          const match = await compare(req.body.password, user.password);
@@ -127,6 +129,7 @@ export const deleteUser = async (req, res) => {
 export const getUser = async (req, res, next) => {
    let user;
    try {
+      console.log(req.params.id);
       user = await User.findById(req.params.id);
       if (!user) {
          return res.status(404).json({ msg: "L'utilisateur n'a pas été trouvé" })

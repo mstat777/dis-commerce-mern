@@ -1,0 +1,155 @@
+@use '../../../global' as *;
+
+.user_db_main {
+   margin-top: 1.5rem;
+   padding-bottom: 5rem;
+   text-align: center;
+
+   h1 {
+      margin: 1.5rem;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+   }
+   .user_account_form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 1.5rem auto; 
+      padding: 2.4rem 2rem;
+      font-size: 1.4rem;
+      background-color: $secondary-color-7;
+      
+      label {
+         position: relative;
+         display: flex;
+         align-items: flex-start;
+         justify-content: flex-start;
+         margin-bottom: 1.5rem;
+         border: none;
+      
+         > span {
+            display: inline-block;
+            width: 42%;
+            margin: .5rem .8rem 0 0;
+            text-align: right;
+            white-space: nowrap;
+            overflow: hidden;
+         }
+         /*** les saisies ***/
+         > *:nth-child(2) {
+            display: inline-block;
+            width: 48%;
+            padding: .3rem .8rem;
+            font-size: 1.6rem;
+            font-weight: 500;
+         }
+         input,
+         textarea {
+            display: block;
+            width: 60%;
+            margin-left: .8rem;
+            margin-right: 0;
+            padding: .2rem .6rem;
+         }
+         textarea {
+            height: 10rem;
+         }
+         textarea:disabled,
+         input[type="email"]:disabled,
+         input[type="tel"]:disabled,
+         input[type="date"]:disabled,
+         input[type="text"]:disabled {
+            color: $darkgrey-color-1;
+            background-color: $lightgrey-color-4;
+         }
+         /*** les boutons Modif ***/
+         > button {
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+            height: 2rem;
+            width: 2rem;
+            margin: .4rem 0 0 .8rem;
+            border: none;
+            border-radius: .2rem;
+            background-color: $secondary-color-5;
+            transition: opacity .3s;
+            &:hover {
+               cursor: pointer;
+               opacity: .7;
+            }
+            .modify_icon {
+               font-size: 1.2rem;
+               color: $light-color;
+            }
+         }
+         .passwordBtn {
+            margin-top: 0;
+            text-align: left;
+            text-decoration: underline;
+            background-color: transparent;
+         }
+         /* l'oeil d'affichage du mdp */
+         .pass_icon_ctn {
+            position: absolute;
+            right: 4rem;
+            top: 0;
+            height: 2rem;
+            width: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            &:hover {
+               cursor: pointer;
+            }
+            .pass_icon {
+               font-size: 1.4rem;
+               color: $secondary-color-1;
+            }
+         }
+         &:nth-child(8) {
+            > button {
+               margin-top: .2rem;
+            }
+         }
+      }
+      > button {
+         margin: 1.5rem auto 0;
+         padding: .8rem 1rem .6rem;
+      }
+   }
+   .ok_msg,
+   .err_msg {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      color: $nok-color;
+      white-space: break-spaces;
+   }
+   .ok_msg {
+      font-size: 2rem;
+      font-weight: 500;
+      color: $ok-color;
+   }
+
+   @media screen and (min-width: $tablet) {
+      display: inline-block;
+      margin-top: 120px;
+      padding: 1.5rem auto;
+   
+      .user_account_form {
+         max-width: 600px;
+         > label {
+            /* l'oeil d'affichage du mdp */
+            .pass_icon_ctn {
+               right: 4.5rem;
+            }
+         }
+      }
+   }
+   @media screen and (min-width: $desktop) {
+      margin-top: 110px;
+   }
+}

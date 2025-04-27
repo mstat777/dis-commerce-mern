@@ -1,0 +1,25 @@
+@use '../../../global' as *;
+
+.user_cart {
+   margin-top: 1.5rem;
+   padding-bottom: 5rem;
+   text-align: center;
+
+   .total {
+      margin-top: 4rem;
+      border-top: 2px solid $main-color-1;
+      text-align: left;
+      background-color: $secondary-color-5;
+  
+      h2 {
+         font-size: 2rem;
+         > span {
+            color: $dark-color;
+         }
+      }
+  
+      .tax_note{
+         font-size: 1.2rem;
+      }
+  }
+}

@@ -1,10 +1,14 @@
 import './Home.scss';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { fetchPromoProducts } from '../../utils/fetchData';
 import ProductCard from '../../components/ProductCard/Index';
 
 export default function Home(){
    const [products, setProducts] = useState([]);
+
+   const user = useSelector((state) => state.user);
+   console.log(user);
 
    useEffect(() => {
       async function fetchData() {
